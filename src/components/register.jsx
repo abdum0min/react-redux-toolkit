@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
 import { Input } from '../ui'
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUserStart } from '../slice/auth'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+  const {isLoading} = useSelector(state => state.auth)
+
+  const loginHandler = e => {
+    e.preventDefault()
+    dispatch(registerUserStart())
+  }
 
   return (
     <main className="form-signin w-25 m-auto mt-5">
@@ -13,7 +22,7 @@ const Register = () => {
         <Input label={'Username'} state={name} setState={setName}/>
         <Input label={'Email Adress'} state={email} setState={setEmail} />
         <Input label={'Password'} state={password} setState={setPassword} type={'password'} />
-        <button class="btn btn-primary w-100 py-2  mt-2" type="submit">Register</button>
+        <button class="btn btn-primary w-100 py-2  mt-2" disabled={isLoading} onClick={loginHandler} type="submit">{isLoading ? 'loading...' : 'register'}</button>
         <p class="mt-5 mb-3 text-body-secondary">© 2017–2025</p>
       </form>
     </main>
