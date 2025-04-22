@@ -9,7 +9,6 @@ const Register = () => {
   return (
     <main className="form-signin w-25 m-auto mt-5">
       <form>
-        {/* <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"/> */}
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
         <Input label={'Username'} state={name} setState={setName}/>
         <Input label={'Email Adress'} state={email} setState={setEmail} />
