@@ -30,7 +30,7 @@ const Login = () => {
       if(loggedin){
         navigate('/')
       } 
-    }, [])
+    }, [loggedin])
 
   return (
     <main className="form-signin w-25 m-auto mt-5">

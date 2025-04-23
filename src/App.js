@@ -1,8 +1,32 @@
 import {Routes, Route} from 'react-router-dom'
 import {Main, Login, Register, Navbar} from './components/'
+import { useEffect } from 'react'
+import AuthService from './service/auth'
+import { useDispatch } from 'react-redux'
+import { signUserFailure, signUserSuccess } from './slice/auth'
+import { getItem } from './helpers/persistance-storage'
 
 
 const App = () => {
+  const dispatch = useDispatch()
+
+
+  const getUser = async() =>{
+    try {
+      const response = await AuthService.getUser()
+      dispatch(signUserSuccess(response.user))
+    } catch (error) {
+      dispatch(signUserFailure())
+    }
+  }
+
+  useEffect(()=>{
+    const token = getItem('token')
+    if(token){
+      getUser()
+    }
+  }, [])
+
   return (
     <div>
       <Navbar/>
