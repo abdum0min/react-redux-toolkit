@@ -1,17 +1,13 @@
 import {Routes, Route} from 'react-router-dom'
-import {Main, Login, Register, Navbar, ArticleDetail, CreateArticle} from './components/'
+import {Main, Login, Register, Navbar, ArticleDetail, CreateArticle, EditArticle} from './components/'
 import { useEffect } from 'react'
 import AuthService from './service/auth'
 import { useDispatch } from 'react-redux'
 import { signUserFailure, signUserSuccess } from './slice/auth'
 import { getItem } from './helpers/persistance-storage'
-import ArticleService from './service/article'
-import { getArticlesFailure, getArticlesStart, getArticlesSuccess } from './slice/article'
-
 
 const App = () => {
   const dispatch = useDispatch()
-
 
   const getUser = async() =>{
     try {
@@ -21,8 +17,6 @@ const App = () => {
       dispatch(signUserFailure())
     }
   }
-
-
 
   useEffect(()=>{
     const token = getItem('token')
@@ -41,6 +35,7 @@ const App = () => {
           <Route path='/register' element={<Register/>} />
           <Route path='/article/:slug' element={<ArticleDetail/>} />
           <Route path='/create-article' element={<CreateArticle/>} />
+          <Route path='/edit-article/:slug' element={<EditArticle/>}/>
         </Routes>
       </div>
     </div>
@@ -48,4 +43,3 @@ const App = () => {
 }
 
 export default App
-
