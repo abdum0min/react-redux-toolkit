@@ -24,6 +24,9 @@ const Navbar = () => {
       {loggedin ? (
         <>
           <p className='me-3 m-0 py-2 link-body-emphasis text-decoration-none'>{user.username}</p>
+          <Link to={'/create-article'} className='me-3 py-2 link-body-emphasis text-decoration-none'>
+            Create Article
+          </Link>
           <button className='btn btn-outline-danger' onClick={logoutHandler}>Logout</button>
         </>
       ) : (
